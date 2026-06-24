@@ -1,6 +1,6 @@
 // Bauhaus-style geometric mosaic band, recreated natively in Typst.
 // Mirrors the tile band on the NMU Faculty of Science module-guide cover.
-#import "brand.typ": nmu-navy, nmu-yellow, nmu-science, nmu-grey
+#import "_brand.typ": nmu-navy, nmu-yellow, nmu-science, nmu-grey
 
 // A single square tile, clipped. `m` selects the motif (0..9),
 // `a` is the background fill, `b` the foreground fill.

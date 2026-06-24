@@ -1,0 +1,60 @@
+---
+assessment: true
+format: nmu-typst
+title: "Class Test 2"
+module-name: "Introduction to Statistics"
+module-code: "STA101"
+examiner: "S. Janse van Rensburg"
+duration: "90 minutes"
+assessment-date: "15 August 2026"
+solutions: true          # set to false to print the question paper without answers
+instructions: "Answer all questions. Show all working. Non-programmable calculators are permitted."
+brand-font: "nunito"
+---
+
+```{=typst}
+#question(10)[
+  Define a sampling distribution and explain why it is central to statistical
+  inference.
+
+  #solution[
+    The sampling distribution of a statistic is the distribution of that
+    statistic over all possible samples of a given size. It links a single
+    sample to the population parameter and underpins confidence intervals and
+    hypothesis tests.
+  ]
+]
+```
+
+```{=typst}
+#question(none)[
+  Consider the sample mean $overline(X)$ of a random sample of size $n$.
+
+  #part(4)[
+    State the Central Limit Theorem.
+    #solution[
+      For large $n$, $overline(X)$ is approximately normal regardless of the
+      population distribution, with mean $mu$ and variance $sigma^2 \/ n$.
+    ]
+  ]
+  #part(4)[
+    Explain how the variance of $overline(X)$ changes with $n$.
+    #solution[
+      The variance is $sigma^2 \/ n$, so it shrinks in proportion to $1 \/ n$.
+    ]
+  ]
+]
+```
+
+```{=typst}
+#question(7)[
+  A claim states that a population mean equals 50. Briefly outline the steps of
+  a hypothesis test for this claim.
+
+  #solution[
+    State $H_0: mu = 50$ and $H_1: mu eq.not 50$; choose a significance level;
+    compute the test statistic; compare to the critical value (or use the
+    p-value); conclude.
+  ]
+]
+```
