@@ -1,0 +1,28 @@
+---
+letter: true
+format: nmu-typst
+campus: "Gqeberha Campus"
+school: "Department of Statistics, Faculty of Science"
+tel: "+27 41 504 0000"
+fax: "+27 41 504 0001"
+email: "statistics@mandela.ac.za"
+ref: "STA/2026/014"
+contact: "Dr S. Janse van Rensburg"
+letter-date: "24 June 2026"
+salutation: "Dear Dr Smith,"
+closing: "Kind Regards,"
+signature: "Dr S. Janse van Rensburg"
+signature-title: "Lecturer, Department of Statistics"
+brand-font: "nunito"
+---
+
+Thank you for your interest in the Department of Statistics at Nelson
+Mandela University. It is my pleasure to confirm the arrangements for your
+forthcoming visit to our Gqeberha campus.
+
+We have scheduled a research seminar for the morning of your arrival, followed
+by individual meetings with members of our postgraduate research group. A
+detailed itinerary will follow under separate cover.
+
+Please do not hesitate to contact me should you require any further
+information ahead of your visit.

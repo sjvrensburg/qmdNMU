@@ -1,0 +1,56 @@
+---
+title: "Module Guide"
+faculty: "Faculty of Science"
+hashtag: "2026"
+module-name: "Introduction to Statistics"
+module-code: "STA101"
+qualification: "BSc (Mathematical Sciences)"
+department: "Department of Statistics"
+campus: "Gqeberha"
+lecturer: "Dr S. Janse van Rensburg"
+year: "2026"
+brand-font: "nunito"
+format: nmu-typst
+---
+
+# Module Information
+
+Welcome to the module. This guide sets out everything you need to know.
+
+::: {.callout-note}
+Read this guide in full during the first week of the semester.
+:::
+
+## Outcomes
+
+On completion you should be able to apply core statistical reasoning.
+
+```{=typst}
+#nmu-section("Lecturer Information", key: "Lecturer-Information",
+  subtitle: "Who to contact and when")
+```
+
+Consultation hours are by appointment.
+
+```{=typst}
+#nmu-section("Assessment", key: "Assessment",
+  subtitle: "How you will be evaluated")
+```
+
+```{=typst}
+#nmu-callout(title: "Important", kind: "warning")[
+  Late submissions incur a 10% penalty per day.
+]
+```
+
+| Component | Weight |
+|-----------|-------:|
+| Tests     | 40%    |
+| Project   | 20%    |
+| Exam      | 40%    |
+
+```{=typst}
+#nmu-section("Resources", key: "Resources")
+```
+
+All materials are on the learning management system.

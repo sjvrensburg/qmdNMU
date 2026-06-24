@@ -1,0 +1,8 @@
+project:
+  title: qmdNMU
+
+# Unofficial Nelson Mandela University (Faculty of Science) document templates.
+# This file makes the repo a Quarto project for rendering the demo documents.
+# It is NOT copied into a user's project by `quarto use template`
+# (see .quartoignore). End users select a template via the front-matter flag and
+# `format: nmu-typst` — see README.md.

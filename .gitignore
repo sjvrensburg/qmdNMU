@@ -1,0 +1,13 @@
+# Examples folder with NMU PowerPoint and Word Document templates
+examples/
+/.quarto/
+**/*.quarto_ipynb
+
+# Rendered output
+*.pdf
+
+# Quarto Typst render artifacts (format-resources copied next to the output)
+/assets/
+/brand.typ
+/mosaic.typ
+/*.typ

@@ -1,0 +1,58 @@
+---
+lecture-notes: true
+format: nmu-typst
+title: "Statistical Properties of OLS"
+subtitle: "Lecture Notes"
+author: "S. Janse van Rensburg"
+notes-date: "Semester 1, 2026"
+module-code: "STA321"
+toc: true
+brand-font: "nunito"
+---
+
+# Introduction
+
+The Ordinary Least Squares (OLS) estimator can serve as a powerful inferential
+tool. These notes examine the statistical properties that make OLS valuable for
+drawing inferences about population parameters from sample data.
+
+# The Regression Function
+
+We start from a model of the form
+$$y_i = \mathbf{x}'_i\boldsymbol{\beta} + \varepsilon_i,$$
+or in matrix form $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon}$.
+
+A key property of $\varepsilon$ is its orthogonality to all $\mathbf{x}_i$:
+$$E[\mathbf{x}_i \cdot \varepsilon_i] = \mathbf{0} \quad \forall\, i \in \{1, \ldots, n\}.$$
+
+## Finite-sample assumptions
+
+```{=typst}
+#nmu-callout(title: "The Gauss–Markov Assumptions", kind: "note")[
+  + *Linearity* — the model is linear in parameters.
+  + *Random sampling* — the data are randomly sampled.
+  + *No perfect collinearity* among the regressors.
+  + *Zero conditional mean* — $E[epsilon_i | bold(X)] = 0$.
+  + *Homoskedasticity* — $V[epsilon_i | bold(X)] = sigma^2$ for all $i$.
+]
+```
+
+Under these assumptions OLS is the Best Linear Unbiased Estimator (BLUE).
+
+```{=typst}
+#nmu-callout(title: "Normality not required", kind: "warning")[
+  The Gauss–Markov assumptions make no claim about the distribution of the error
+  terms — normality is only needed for exact finite-sample inference.
+]
+```
+
+# Results
+
+The OLS estimator $\hat{\boldsymbol{\beta}} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}$
+is unbiased and has covariance $\sigma^2 (\mathbf{X}'\mathbf{X})^{-1}$.
+
+```{=typst}
+#nmu-callout(title: "Key result", kind: "tip")[
+  Among all linear unbiased estimators, OLS attains the smallest variance.
+]
+```
