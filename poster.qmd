@@ -1,0 +1,51 @@
+---
+poster: true
+format: nmu-typst
+title: "Sampling Distributions and the Central Limit Theorem"
+author: "S. Janse van Rensburg, A. N. Other"
+affiliation: "Department of Statistics, Faculty of Science, Nelson Mandela University"
+poster-cols: 2
+footer-url: "mandela.ac.za"
+brand-font: "nunito"
+---
+
+# Introduction
+
+The sampling distribution of a statistic is the distribution of that statistic
+over all possible samples of a given size. It is the conceptual bridge between a
+single observed sample and the population parameter we wish to estimate.
+
+## Why it matters
+
+- Underpins confidence intervals
+- Underpins hypothesis testing
+- Quantifies estimator variability
+
+# Methods
+
+We simulated $10\,000$ samples of size $n$ from a range of population
+distributions and recorded the sample mean for each.
+
+- Populations: uniform, exponential, bimodal
+- Sample sizes: $n \in \{5, 30, 100\}$
+- Outcome: distribution of $\bar{X}$
+
+# Results
+
+For all populations, the distribution of $\bar{X}$ approached normality as $n$
+increased, with variance shrinking in proportion to $1/n$ — consistent with the
+Central Limit Theorem.
+
+::: {.callout-note}
+Even strongly skewed populations yielded near-normal sample means by $n = 30$.
+:::
+
+# Conclusion
+
+The Central Limit Theorem holds robustly across population shapes, justifying
+normal-theory inference for moderately large samples.
+
+# References
+
+1. Casella, G. & Berger, R. L. (2002). *Statistical Inference*.
+2. Wasserman, L. (2004). *All of Statistics*.

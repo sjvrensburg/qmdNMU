@@ -1,0 +1,18 @@
+title: NMU Templates
+author: Faculty of Sciences
+version: 0.1.0
+quarto-required: ">=1.5.0"
+contributes:
+  formats:
+    typst:
+      template-partials:
+        - typst-template.typ
+        - typst-show.typ
+      format-resources:
+        - brand.typ
+        - mosaic.typ
+        - assets
+      toc: false
+      number-sections: true
+      papersize: a4
+      mainfont: Nunito Sans

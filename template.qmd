@@ -1,0 +1,38 @@
+---
+# NMU Faculty of Science templates — starter document.
+# This default is a MODULE GUIDE. To produce a different document type, add the
+# matching flag and swap the front matter (see README.md):
+#   letter: true | slides: true | poster: true | lecture-notes: true
+title: "Module Guide"
+faculty: "Faculty of Science"
+hashtag: "2026"
+module-name: "Module Name"
+module-code: "ABC123"
+qualification: "BSc"
+department: "Department of …"
+campus: "Gqeberha"
+lecturer: "Your Name"
+year: "2026"
+# cover-image: "images/cover.jpg"   # optional; falls back to the branded cover
+brand-font: "nunito"                 # or "avenir" if installed
+format: nmu-typst
+---
+
+# Module Information
+
+Replace this with your own content.
+
+```{=typst}
+#nmu-callout(title: "Tip", kind: "tip")[
+  Use callouts for important notes. Kinds: info, note, tip, warning.
+]
+```
+
+```{=typst}
+#nmu-section("Assessment", key: "Assessment", subtitle: "How you are evaluated")
+```
+
+| Component | Weight |
+|-----------|-------:|
+| Tests     | 40%    |
+| Exam      | 60%    |

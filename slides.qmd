@@ -1,0 +1,37 @@
+---
+slides: true
+format: nmu-typst
+title: "Introduction to Statistics"
+subtitle: "Sampling Distributions"
+author: "S. Janse van Rensburg"
+institute: "Department of Statistics · Faculty of Science"
+slide-date: "Semester 1, 2026"
+aspect: "16:9"
+brand-font: "nunito"
+---
+
+# Foundations
+
+## What is a sampling distribution?
+
+- The distribution of a statistic over all possible samples
+- Bridges a single sample and the population parameter
+- The basis for **confidence intervals** and **hypothesis tests**
+
+## The Central Limit Theorem
+
+For a sample mean $\bar{X}$ drawn from any population with finite variance:
+
+- $\bar{X}$ is approximately normal for large $n$
+- The approximation improves as $n$ grows
+- This holds *regardless* of the population's shape
+
+# Applications
+
+## In practice
+
+- Estimating a population mean from survey data
+- Quality control in laboratory measurements
+- Comparing treatment groups in experiments
+
+Thank you — questions welcome.

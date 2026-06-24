@@ -1,0 +1,12 @@
+# Files NOT copied into a user's project by `quarto use template`.
+# (The _extensions/ directory is always installed; template.qmd is the starter.)
+examples/
+SKILL.md
+_quarto.yml
+*.pdf
+# Demo documents (kept in the repo as references, not copied to users)
+module-guide.qmd
+letter.qmd
+slides.qmd
+poster.qmd
+notes.qmd
