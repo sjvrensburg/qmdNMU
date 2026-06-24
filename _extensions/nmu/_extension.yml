@@ -9,8 +9,9 @@ contributes:
         - typst-template.typ
         - typst-show.typ
       format-resources:
-        - brand.typ
-        - mosaic.typ
+        - _brand.typ
+        - _mosaic.typ
+        - _assessment.typ
         - assets
       toc: false
       number-sections: true

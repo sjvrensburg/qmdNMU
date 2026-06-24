@@ -1,4 +1,38 @@
-$if(lecture-notes)$
+$if(assessment)$
+#show: body => nmu-assessment(
+$if(title)$
+  title: [$title$],
+$endif$
+$if(module-name)$
+  module-name: [$module-name$],
+$endif$
+$if(module-code)$
+  module-code: [$module-code$],
+$endif$
+$if(examiner)$
+  examiner: [$examiner$],
+$endif$
+$if(duration)$
+  duration: [$duration$],
+$endif$
+$if(assessment-date)$
+  date: [$assessment-date$],
+$endif$
+$if(total-marks)$
+  total-marks: [$total-marks$],
+$endif$
+$if(instructions)$
+  instructions: [$instructions$],
+$endif$
+$if(solutions)$
+  solutions: true,
+$endif$
+$if(brand-font)$
+  brand-font: "$brand-font$",
+$endif$
+  body,
+)
+$elseif(lecture-notes)$
 #show: body => nmu-notes(
 $if(title)$
   title: [$title$],

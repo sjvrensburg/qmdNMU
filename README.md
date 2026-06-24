@@ -16,6 +16,7 @@ and callouts).
 | Slides (16:9 / 4:3) | `slides: true` | `slides.qmd` |
 | Research poster (600×900 mm) | `poster: true` | `poster.qmd` |
 | Lecture notes | `lecture-notes: true` | `notes.qmd` |
+| Assessment (test / exam) | `assessment: true` | `assessment.qmd` |
 
 ## Requirements
 
@@ -157,6 +158,47 @@ branded callouts. No cover page.
 | `toc` | boolean | Include a table of contents. Default `false`. |
 
 ---
+
+## Assessment (test / exam)
+
+A branded test/exam paper with an auto-computed mark total and a `solutions`
+toggle that shows or hides the memorandum.
+
+| Key | Type | Description |
+|---|---|---|
+| `assessment: true` | flag | Selects this template. |
+| `title` | string | e.g. "Class Test 2". |
+| `module-name` | string | |
+| `module-code` | string | Shown in the header and footer. |
+| `examiner` | string | |
+| `duration` | string | e.g. "90 minutes". |
+| `assessment-date` | string | Free-text date. |
+| `total-marks` | string | Optional override; omit to auto-sum from the questions. |
+| `instructions` | string | Shown in a callout below the info bar. |
+| `solutions` | boolean | `true` → memorandum (answers shown); `false` → question paper. |
+
+**Question / mark helpers** (in ```` ```{=typst} ```` blocks):
+
+```typst
+#question(10)[
+  Question text.
+  #solution[ Answer shown only when `solutions: true`. ]
+]
+
+#question(none)[          // use none when the parts carry the marks
+  Intro to a multi-part question.
+  #part(4)[ First part. #solution[ … ] ]
+  #part(4)[ Second part. #solution[ … ] ]
+]
+```
+
+- `#question(marks)[…]` — auto-numbered; adds `marks` to the total. Pass `none`
+  when the parts carry the marks (avoids double-counting).
+- `#part(marks)[…]` — lettered (a), (b), … within the question; adds to the total.
+- `#solution[…]` — rendered only when `solutions: true`.
+
+The header's **Total marks** is computed automatically from all `question`/`part`
+marks (unless you set `total-marks`).
 
 ## Callouts
 

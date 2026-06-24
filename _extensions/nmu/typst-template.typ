@@ -1,5 +1,91 @@
-#import "brand.typ": *
-#import "mosaic.typ": nmu-mosaic
+#import "_brand.typ": *
+#import "_mosaic.typ": nmu-mosaic
+#import "_assessment.typ": *
+
+// ===========================================================================
+// Assessment (test / exam) — branded header with module info, duration and an
+// auto-computed mark total; `#question`, `#part`, `#solution` helpers; a
+// `solutions` toggle that shows or hides the memorandum.
+// ===========================================================================
+#let nmu-assessment(
+  title: "Assessment",
+  module-name: none,
+  module-code: none,
+  examiner: none,
+  duration: none,
+  date: none,
+  total-marks: none,
+  instructions: none,
+  solutions: false,
+  brand-font: "nunito",
+  body,
+) = {
+  let fonts = nmu-resolve-fonts(brand-font)
+  set document(title: title)
+  set page(
+    paper: "a4",
+    margin: (top: 22mm, bottom: 20mm, x: 22mm),
+    footer: context {
+      line(length: 100%, stroke: 0.5pt + nmu-science)
+      v(2pt)
+      set text(size: 8.5pt, fill: nmu-grey)
+      grid(columns: (1fr, auto, 1fr),
+        align: (left + horizon, center + horizon, right + horizon),
+        if module-code != none [#module-code] else [],
+        text(fill: nmu-navy, weight: "bold")[Page #context counter(page).display() of #context counter(page).final().first()],
+        if solutions [#text(fill: nmu-science, weight: "bold")[Memorandum]] else [],
+      )
+    },
+  )
+  set text(font: fonts.body, size: 11pt, fill: nmu-navy, lang: "en")
+  set par(justify: true, leading: 0.62em)
+  show link: set text(fill: nmu-science)
+  nmu-solutions-state.update(solutions)
+
+  // ---- Branded header ----
+  align(right, nmu-logo-linear(height: 7mm))
+  v(2mm)
+  line(length: 100%, stroke: 0.5pt + nmu-grey)
+  v(5mm)
+  align(center, block(width: 100%)[
+    #if module-code != none or module-name != none {
+      text(size: 13pt, weight: "bold", fill: nmu-science)[
+        #if module-code != none [#module-code]
+        #if module-code != none and module-name != none [ — ]
+        #if module-name != none [#module-name]
+      ]
+      linebreak(); v(2mm)
+    }
+    #text(size: 22pt, weight: "bold", fill: nmu-navy)[#title]
+    #if solutions { text(size: 16pt, fill: nmu-science)[  · Memorandum] }
+  ])
+  v(5mm)
+
+  // Info bar: duration / total marks / date
+  block(width: 100%, inset: 9pt, radius: 3pt, fill: nmu-grey-light, stroke: 0.5pt + nmu-navy)[
+    #grid(columns: (1fr, 1fr, 1fr), align: (left, center, right),
+      if duration != none [*Duration:* #duration] else [],
+      [*Total marks:* #if total-marks != none [#total-marks] else [#nmu-total-marks()]],
+      if date != none [*Date:* #date] else [],
+    )
+    #if examiner != none {
+      v(4pt)
+      text(size: 9.5pt, fill: nmu-grey)[Examiner: #examiner]
+    }
+  ]
+
+  if instructions != none {
+    v(4mm)
+    nmu-callout(title: "Instructions", kind: "note")[#instructions]
+  }
+  v(3mm)
+  line(length: 100%, stroke: 2pt + nmu-science)
+  v(6mm)
+
+  body
+}
+
+
 
 // ===========================================================================
 // Lecture notes — between the plain academic notes and the module guide:
