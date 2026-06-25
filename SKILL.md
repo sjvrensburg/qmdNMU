@@ -59,8 +59,9 @@ Every document needs `format: nmu-typst`.
 - **`cover-image` paths** are relative to the `.qmd` and passed verbatim to
   Typst. Put the image in the project and reference it like
   `cover-image: "images/cover.jpg"`.
-- **Brand callouts**: use `#nmu-callout(...)` in a `` ```{=typst} `` block for
-  branded boxes. Native `::: {.callout-note}` works but is NOT brand-styled.
+- **Brand callouts**: native `::: {.callout-*}` divs are auto-restyled on-brand
+  and can run code cells (preferred); `#nmu-callout(...)` in a `` ```{=typst} ``
+  block is for Typst-only bodies. See Callouts below.
 - Keep colours/logos as-is — do not introduce off-brand colours. Faculty accent
   is Science green `#006b34`; primary navy `#071b2c`; secondary yellow `#ffb81c`.
 
@@ -110,10 +111,17 @@ white version that prints/photocopies cleanly.
 
 ## Callouts
 
-```typst
-#nmu-callout(title: "Heading", kind: "note")[ Body, supports math: $x^2$. ]
-```
-`kind`: `info`/`note` (navy), `tip` (green), `warning` (amber).
+Two options:
+- **Native (preferred, runs code):** plain `::: {.callout-note}` … `:::` divs are
+  auto-restyled into the NMU palette under `nmu-typst`, and execute `` ```{r} ``/
+  `` ```{python} `` cells inside them. Kinds: `note` (navy), `tip` (green),
+  `warning` (amber), `important` (crimson), `caution` (burnt orange). Cross-refs
+  work. No source changes needed to be on-brand.
+- **`#nmu-callout` (Typst-only body, no code):** in a `` ```{=typst} `` block:
+  ```typst
+  #nmu-callout(title: "Heading", kind: "note")[ Body, supports math: $x^2$. ]
+  ```
+  `kind`: `info`/`note` (navy), `tip` (green), `warning` (amber).
 
 ## Minimal examples
 

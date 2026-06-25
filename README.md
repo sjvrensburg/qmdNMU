@@ -203,8 +203,42 @@ marks (unless you set `total-marks`).
 
 ## Callouts
 
-Available in every template via a ```` ```{=typst} ```` block. Each renders a
-header bar (accent colour, white/navy title) over a light tinted body.
+There are two ways to make a branded box, depending on whether the body needs
+to run code.
+
+### Native callouts (recommended — can contain executable code)
+
+Plain Quarto fenced divs are automatically restyled into the NMU palette under
+`format: nmu-typst`. Because they are native Quarto content, they execute
+`` ```{r} ``/`` ```{python} `` cells and support Markdown, math and lists — and
+they need **no source changes** to become on-brand.
+
+````markdown
+::: {.callout-tip title="Worked example"}
+We compute summary statistics:
+
+```{r}
+summary(cars$speed)
+```
+:::
+````
+
+| Callout kind | Accent |
+|---|---|
+| `note` | Navy |
+| `tip` | Science green |
+| `warning` | Amber |
+| `important` | Crimson |
+| `caution` | Burnt orange |
+
+Cross-referenceable callouts (e.g. `::: {#tip-foo .callout-tip}` … `@tip-foo`)
+also work.
+
+### `#nmu-callout` (Typst-only body, no code execution)
+
+For a box authored directly in Typst — a header-bar style, but its body is raw
+Typst and so **cannot** contain executable code cells. Use it inside a
+```` ```{=typst} ```` block:
 
 ```typst
 #nmu-callout(title: "The Gauss–Markov Assumptions", kind: "note")[
@@ -212,15 +246,7 @@ header bar (accent colour, white/navy title) over a light tinted body.
 ]
 ```
 
-| `kind` | Bar colour |
-|---|---|
-| `info` / `note` | Navy |
-| `tip` | Science green |
-| `warning` | Amber (navy title) |
-
-You can also use Quarto's native `::: {.callout-note}` blocks, but those render
-in Quarto's default (non-brand) style — prefer `#nmu-callout` for brand
-consistency.
+`kind`: `info`/`note` (navy), `tip` (green), `warning` (amber, navy title).
 
 ## Multiple authors
 

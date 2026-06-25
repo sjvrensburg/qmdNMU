@@ -3,6 +3,53 @@
 #import "_assessment.typ": *
 
 // ===========================================================================
+// Branded native callouts (issue #1)
+//
+// Quarto defines a default `#callout(...)` for Typst output and calls it for
+// every native `::: {.callout-*}` div. Because this partial is injected AFTER
+// that definition, redefining `#callout` here shadows it — so standard callout
+// divs (note/tip/warning/important/caution) automatically render in the NMU
+// brand palette, with NO source changes to existing documents. Executable code
+// cells, math and Markdown inside the div still work (they are native Quarto
+// content, unlike a `{=typst}` raw block).
+//
+// We key on the per-kind `icon_color` Quarto passes (its colours are fixed) and
+// reproduce Quarto's block nesting so cross-referenceable callouts keep working.
+// ===========================================================================
+#let nmu-callout-palette = (
+  "#0758e5": (nmu-navy,    nmu-grey-light,   white),     // note
+  "#00a047": (nmu-science, nmu-science-tint, white),     // tip
+  "#eb9113": (nmu-yellow-2, rgb("#fff5da"),  nmu-navy),  // warning
+  "#cc1914": (nmu-alert,   nmu-alert-tint,   white),     // important
+  "#fc5300": (nmu-caution, nmu-caution-tint, nmu-navy),  // caution
+)
+
+// `_t` (Quarto's title-fill slot) is unused: we colour the title with the bar
+// colour on a light tint rather than white-on-dark, so that the plain title
+// stays legible even after Quarto's cross-ref show rule rebuilds it ("Note 1:
+// …") in the default text colour. The trailing `+ []` keeps the title content a
+// sequence (`.children`), which that show rule requires.
+#let callout(
+  body: [], title: "Callout", background_color: rgb("#dddddd"),
+  icon: none, icon_color: black, body_background_color: white,
+) = {
+  let key = lower(icon_color.to-hex()).slice(0, 7)
+  let (bar, bg, _t) = nmu-callout-palette.at(
+    key, default: (nmu-navy, nmu-grey-light, white))
+  block(
+    breakable: false, fill: white, radius: 3pt, clip: true, width: 100%,
+    stroke: (left: 3pt + bar, rest: 0.5pt + bar),
+    block(inset: 0pt, width: 100%, below: 0pt,
+      block(fill: bg, width: 100%, inset: (x: 12pt, top: 8pt, bottom: 6pt),
+        text(weight: "bold", fill: bar, size: 1.02em)[#title] + [])) +
+    if body != [] {
+      block(inset: 0pt, width: 100%,
+        block(fill: white, width: 100%, inset: (x: 12pt, top: 8pt, bottom: 10pt), body))
+    },
+  )
+}
+
+// ===========================================================================
 // Assessment (test / exam) — branded header with module info, duration and an
 // auto-computed mark total; `#question`, `#part`, `#solution` helpers; a
 // `solutions` toggle that shows or hides the memorandum.
