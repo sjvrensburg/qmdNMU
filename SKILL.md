@@ -86,6 +86,10 @@ section header with a matching illustration. Keys: `Module-Info`,
 `slide-date`, `aspect` (`"16:9"` | `"4:3"`), `cover-image` (optional),
 `brand-font`.
 Headings drive slides: `#` = section-divider slide, `##` = content slide.
+**Lecturer/student toggle:** wrap lecturer-only material (answers, proofs, live
+code) in `::: {.instructor}` … `:::`. Hidden by default (student-safe); reveal
+in a branded box with `audience: lecturer` (front matter or `-M audience:lecturer`).
+Works in every template. Give each render a distinct `-o` name.
 
 ### Poster (`poster: true`)
 `title`, `author`, `affiliation`, `poster-cols` (default 2), `footer-url`
