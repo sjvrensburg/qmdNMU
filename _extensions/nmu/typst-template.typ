@@ -17,52 +17,65 @@
   total-marks: none,
   instructions: none,
   solutions: false,
+  monochrome: false,
   brand-font: "nunito",
   body,
 ) = {
   let fonts = nmu-resolve-fonts(brand-font)
+  // High-contrast, printer-friendly palette when `monochrome: true`.
+  let ink    = if monochrome { black } else { nmu-navy }
+  let accent = if monochrome { black } else { nmu-science }
+  let soft   = if monochrome { luma(90) } else { nmu-grey }
+  let panel  = if monochrome { luma(240) } else { nmu-grey-light }
   set document(title: title)
   set page(
     paper: "a4",
     margin: (top: 22mm, bottom: 20mm, x: 22mm),
     footer: context {
-      line(length: 100%, stroke: 0.5pt + nmu-science)
+      line(length: 100%, stroke: 0.5pt + accent)
       v(2pt)
-      set text(size: 8.5pt, fill: nmu-grey)
+      set text(size: 8.5pt, fill: soft)
       grid(columns: (1fr, auto, 1fr),
         align: (left + horizon, center + horizon, right + horizon),
         if module-code != none [#module-code] else [],
-        text(fill: nmu-navy, weight: "bold")[Page #context counter(page).display() of #context counter(page).final().first()],
-        if solutions [#text(fill: nmu-science, weight: "bold")[Memorandum]] else [],
+        text(fill: ink, weight: "bold")[Page #context counter(page).display() of #context counter(page).final().first()],
+        if solutions [#text(fill: accent, weight: "bold")[Memorandum]] else [],
       )
     },
   )
-  set text(font: fonts.body, size: 11pt, fill: nmu-navy, lang: "en")
+  set text(font: fonts.body, size: 11pt, fill: ink, lang: "en")
   set par(justify: true, leading: 0.62em)
-  show link: set text(fill: nmu-science)
+  show link: set text(fill: accent)
   nmu-solutions-state.update(solutions)
+  nmu-mono-state.update(monochrome)
 
   // ---- Branded header ----
-  align(right, nmu-logo-linear(height: 7mm))
+  // Monochrome mode uses the brand's grayscale lockup so the masthead prints
+  // and photocopies cleanly; colour mode keeps the linear full-colour wordmark.
+  if monochrome {
+    align(center, image(nmu-logo-grayscale, height: 24mm))
+  } else {
+    align(right, nmu-logo-linear(height: 7mm))
+  }
   v(2mm)
-  line(length: 100%, stroke: 0.5pt + nmu-grey)
+  line(length: 100%, stroke: 0.5pt + soft)
   v(5mm)
   align(center, block(width: 100%)[
     #if module-code != none or module-name != none {
-      text(size: 13pt, weight: "bold", fill: nmu-science)[
+      text(size: 13pt, weight: "bold", fill: accent)[
         #if module-code != none [#module-code]
         #if module-code != none and module-name != none [ — ]
         #if module-name != none [#module-name]
       ]
       linebreak(); v(2mm)
     }
-    #text(size: 22pt, weight: "bold", fill: nmu-navy)[#title]
-    #if solutions { text(size: 16pt, fill: nmu-science)[  · Memorandum] }
+    #text(size: 22pt, weight: "bold", fill: ink)[#title]
+    #if solutions { text(size: 16pt, fill: accent)[  · Memorandum] }
   ])
   v(5mm)
 
   // Info bar: duration / total marks / date
-  block(width: 100%, inset: 9pt, radius: 3pt, fill: nmu-grey-light, stroke: 0.5pt + nmu-navy)[
+  block(width: 100%, inset: 9pt, radius: 3pt, fill: panel, stroke: 0.5pt + ink)[
     #grid(columns: (1fr, 1fr, 1fr), align: (left, center, right),
       if duration != none [*Duration:* #duration] else [],
       [*Total marks:* #if total-marks != none [#total-marks] else [#nmu-total-marks()]],
@@ -70,16 +83,16 @@
     )
     #if examiner != none {
       v(4pt)
-      text(size: 9.5pt, fill: nmu-grey)[Examiner: #examiner]
+      text(size: 9.5pt, fill: soft)[Examiner: #examiner]
     }
   ]
 
   if instructions != none {
     v(4mm)
-    nmu-callout(title: "Instructions", kind: "note")[#instructions]
+    nmu-callout(title: "Instructions", kind: "note", mono: monochrome)[#instructions]
   }
   v(3mm)
-  line(length: 100%, stroke: 2pt + nmu-science)
+  line(length: 100%, stroke: 2pt + accent)
   v(6mm)
 
   body

@@ -176,6 +176,7 @@ toggle that shows or hides the memorandum.
 | `total-marks` | string | Optional override; omit to auto-sum from the questions. |
 | `instructions` | string | Shown in a callout below the info bar. |
 | `solutions` | boolean | `true` → memorandum (answers shown); `false` → question paper. |
+| `monochrome` | boolean | `true` → high-contrast black & white for clean printing/photocopying. |
 
 **Question / mark helpers** (in ```` ```{=typst} ```` blocks):
 

@@ -6,13 +6,22 @@
 #let nmu-pcounter   = counter("nmu-part")
 #let nmu-marktotal  = counter("nmu-marktotal")
 #let nmu-solutions-state = state("nmu-solutions", false)
+// High-contrast, printer-friendly mode. Set by `monochrome: true` front matter;
+// helpers below read it (in a context block) to pick a black/white palette.
+#let nmu-mono-state = state("nmu-mono", false)
 
 // Final accumulated mark total (resolves in a context block, two-pass layout).
 #let nmu-total-marks() = context nmu-marktotal.final().first()
 
-#let nmu-marks-tag(m) = text(fill: nmu-science, weight: "bold")[
-  [#m #if m == 1 [mark] else [marks]]
-]
+// Accent ink for marks / question headings — black in monochrome mode.
+#let nmu-assess-accent() = if nmu-mono-state.get() { black } else { nmu-science }
+#let nmu-assess-ink()    = if nmu-mono-state.get() { black } else { nmu-navy }
+
+#let nmu-marks-tag(m) = context {
+  text(fill: nmu-assess-accent(), weight: "bold")[
+    [#m #if m == 1 [mark] else [marks]]
+  ]
+}
 
 // A top-level question. Auto-numbered; adds `marks` to the running total.
 // Pass `none` for the marks when the question's parts carry the marks instead
@@ -23,8 +32,8 @@
   if marks != none { nmu-marktotal.update(n => n + marks) }
   block(above: 16pt, below: 8pt, breakable: true, width: 100%)[
     #grid(columns: (1fr, auto), align: (left + top, right + top),
-      text(weight: "bold", fill: nmu-navy, size: 12pt)[
-        Question #context nmu-qcounter.display()
+      context text(weight: "bold", fill: nmu-assess-ink(), size: 12pt)[
+        Question #nmu-qcounter.display()
       ],
       if marks != none { nmu-marks-tag(marks) } else [],
     )
@@ -50,6 +59,6 @@
 // Solution / memorandum content — shown only when `solutions: true`.
 #let solution(body) = context {
   if nmu-solutions-state.get() {
-    nmu-callout(title: "Solution", kind: "tip")[#body]
+    nmu-callout(title: "Solution", kind: "tip", mono: nmu-mono-state.get())[#body]
   }
 }

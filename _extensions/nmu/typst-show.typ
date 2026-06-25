@@ -27,6 +27,9 @@ $endif$
 $if(solutions)$
   solutions: true,
 $endif$
+$if(monochrome)$
+  monochrome: true,
+$endif$
 $if(brand-font)$
   brand-font: "$brand-font$",
 $endif$
