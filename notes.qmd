@@ -56,3 +56,13 @@ is unbiased and has covariance $\sigma^2 (\mathbf{X}'\mathbf{X})^{-1}$.
   Among all linear unbiased estimators, OLS attains the smallest variance.
 ]
 ```
+
+Native Quarto callouts are also restyled in the NMU palette, and — unlike the
+`{=typst}` boxes above — can contain executable code cells, Markdown and
+cross-references:
+
+::: {.callout-note title="Estimating the variance"}
+The error variance $\sigma^2$ is estimated by
+$s^2 = \dfrac{\hat{\boldsymbol{\varepsilon}}'\hat{\boldsymbol{\varepsilon}}}{n - k}$,
+where $k$ is the number of regressors (including the intercept).
+:::

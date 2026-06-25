@@ -19,6 +19,14 @@
 #let nmu-science     = rgb("#006b34")
 #let nmu-science-tint = rgb("#cfe3d6")
 
+// Functional alert accents — not primary brand colours; used only to keep the
+// `important` / `caution` callout kinds semantically distinct while harmonising
+// with the navy/green/yellow palette.
+#let nmu-alert        = rgb("#9e1b32")  // deep crimson (important)
+#let nmu-alert-tint   = rgb("#f6dee3")
+#let nmu-caution      = rgb("#b5561c")  // burnt orange (caution)
+#let nmu-caution-tint = rgb("#f7e4d6")
+
 // Active accent for this template set (Science faculty)
 #let nmu-accent      = nmu-science
 
