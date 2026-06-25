@@ -34,4 +34,9 @@ For a sample mean $\bar{X}$ drawn from any population with finite variance:
 - Quality control in laboratory measurements
 - Comparing treatment groups in experiments
 
+::: {.instructor}
+**Lecturer note.** Hidden in the student deck; revealed only with
+`-M audience:lecturer`. Put answers, proof sketches or live code here.
+:::
+
 Thank you — questions welcome.

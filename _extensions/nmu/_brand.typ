@@ -105,6 +105,19 @@
   ]
 }
 
+// Instructor-only box — wraps lecturer material revealed by instructor.lua when
+// `audience: lecturer`. Amber accent + an "INSTRUCTOR" tag so it reads clearly
+// as not-for-students. Breakable so long proofs can span slides/pages.
+#let nmu-instructor(body) = block(
+  breakable: true, width: 100%, radius: 3pt, clip: true,
+  fill: rgb("#fff5da"),
+  stroke: (left: 3pt + nmu-yellow-2, rest: 0.5pt + nmu-yellow-2),
+  block(inset: 0pt, width: 100%, below: 0pt,
+    block(fill: nmu-yellow-2, width: 100%, inset: (x: 10pt, y: 4pt),
+      text(weight: "bold", fill: nmu-navy, size: 0.62em, tracking: 0.08em)[INSTRUCTOR])) +
+  block(width: 100%, inset: (x: 12pt, top: 8pt, bottom: 10pt), body),
+)
+
 // Section header with a matching brand illustration on the right.
 // `key` maps to assets/illustrations/<key>.jpg
 #let nmu-section(title, key: none, subtitle: none) = {

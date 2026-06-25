@@ -120,6 +120,42 @@ Mirrors the Faculty of Science PowerPoint deck. Slides are driven by headings:
 | `aspect` | `"16:9"` \| `"4:3"` | Default `"16:9"`. |
 | `cover-image` | path | Optional. Your own image for the title-slide band (fit within the band area). Omit to use the default Faculty of Science imagery. Path is relative to the `.qmd`. |
 
+### Lecturer vs. student version
+
+Mark lecturer-only material (answers, proof sketches, live code) with an
+`::: {.instructor}` fenced div. It contains **native Markdown** — so math, lists
+and executable `` ```{r} ``/`` ```{python} `` cells all work:
+
+````markdown
+## Worked problem
+
+Find the derivative of $f(x) = x^2$.
+
+::: {.instructor}
+**Answer.** $f'(x) = 2x$.
+:::
+````
+
+By **default the material is removed** (the student-safe deck — you can never
+hand out answers by accident). Reveal it — wrapped in a branded **Instructor**
+box — by rendering with `audience: lecturer`:
+
+```bash
+quarto render slides.qmd                         # student version
+quarto render slides.qmd -M audience:lecturer    # lecturer version
+```
+
+You can also set `audience: lecturer` (or `instructor-version: true`) in the
+front matter. Give the two renders different output names so they coexist, e.g.
+`-o slides-student.pdf` / `-o slides-lecturer.pdf`.
+
+Notes:
+- The toggle works in **every** template, not just slides — handy for hiding
+  answers in lecture notes too.
+- On a full slide a long instructor box may flow onto a second slide; keep the
+  hidden material concise, or give it its own slide. Page counts legitimately
+  differ between the two versions.
+
 ---
 
 ## Research poster

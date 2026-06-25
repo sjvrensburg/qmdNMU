@@ -8,6 +8,8 @@ contributes:
       template-partials:
         - typst-template.typ
         - typst-show.typ
+      filters:
+        - instructor.lua
       format-resources:
         - _brand.typ
         - _mosaic.typ
