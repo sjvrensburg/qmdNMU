@@ -43,9 +43,12 @@
 // ---------------------------------------------------------------------------
 // Logo helpers (assets bundled with the extension)
 // ---------------------------------------------------------------------------
-#let nmu-logo-colour   = "assets/logos/logo-colour.jpg"
-#let nmu-logo-white    = "assets/logos/logo-white.png"
-#let nmu-logo-reversed = "assets/logos/logo-reversed.png"
+#let nmu-logo-colour    = "assets/logos/logo-colour.jpg"
+#let nmu-logo-white     = "assets/logos/logo-white.png"
+#let nmu-logo-reversed  = "assets/logos/logo-reversed.png"
+// One-colour grayscale lockup — the brand's sanctioned monochrome variant,
+// used only by the assessment template's printer-friendly `monochrome` mode.
+#let nmu-logo-grayscale = "assets/logos/logo-grayscale.png"
 
 // reversed = full-colour reversed logo (white text + yellow shapes, file 06),
 // NOT the monochrome one-colour version — brand prefers full colour everywhere.
@@ -74,15 +77,17 @@
 
 // Coloured callout box with a header bar (kind: info | note | tip | warning).
 // Header bar in the accent colour with a white title; light tinted body.
-#let nmu-callout(title: none, kind: "info", body) = {
+// `mono: true` forces a high-contrast, printer-friendly black/white scheme
+// (used by the assessment template's monochrome mode).
+#let nmu-callout(title: none, kind: "info", mono: false, body) = {
   let palette = (
     info:    (nmu-navy,    nmu-grey-light),
     note:    (nmu-navy,    nmu-grey-light),
     tip:     (nmu-science, nmu-science-tint),
     warning: (nmu-yellow-2, rgb("#fff5da")),
   )
-  let (bar, bg) = palette.at(kind, default: palette.info)
-  let title-fill = if kind == "warning" { nmu-navy } else { white }
+  let (bar, bg) = if mono { (black, white) } else { palette.at(kind, default: palette.info) }
+  let title-fill = if mono { white } else if kind == "warning" { nmu-navy } else { white }
   block(width: 100%, radius: 3pt, clip: true, stroke: 0.5pt + bar, breakable: true)[
     #if title != none {
       block(width: 100%, fill: bar, inset: (x: 12pt, y: 7pt), below: 0pt,

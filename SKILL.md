@@ -98,14 +98,15 @@ Headings: `#` = section header, `##` = subsection.
 ### Assessment / test / exam (`assessment: true`)
 `title`, `module-name`, `module-code`, `examiner`, `duration`,
 `assessment-date`, `total-marks` (optional — auto-summed if omitted),
-`instructions`, `solutions` (bool), `brand-font`.
+`instructions`, `solutions` (bool), `monochrome` (bool), `brand-font`.
 Write questions in `` ```{=typst} `` blocks:
 - `#question(marks)[ … #solution[ … ] ]` — auto-numbered, adds to total.
 - `#question(none)[ … ]` — when the parts carry the marks (no double-count).
 - `#part(marks)[ … ]` — lettered (a),(b),… within a question.
 - `#solution[ … ]` — shown only when `solutions: true`.
 Total marks are auto-computed. Set `solutions: false` for the question paper,
-`true` for the memorandum.
+`true` for the memorandum. Set `monochrome: true` for a high-contrast black &
+white version that prints/photocopies cleanly.
 
 ## Callouts
 

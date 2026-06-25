@@ -8,6 +8,7 @@ examiner: "S. Janse van Rensburg"
 duration: "90 minutes"
 assessment-date: "15 August 2026"
 solutions: true          # set to false to print the question paper without answers
+monochrome: false        # set to true for a high-contrast, printer-friendly (black & white) version
 instructions: "Answer all questions. Show all working. Non-programmable calculators are permitted."
 brand-font: "nunito"
 ---
