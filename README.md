@@ -156,6 +156,28 @@ Notes:
   hidden material concise, or give it its own slide. Page counts legitimately
   differ between the two versions.
 
+### Two-column layouts
+
+Place content side by side with Pandoc fenced-div columns — they are mapped onto
+a Typst `#grid`, so each column's Markdown, math, lists and executable code cells
+still render natively:
+
+````markdown
+:::: {.columns}
+::: {.column width="55%"}
+Left column — text, math $\beta_1$, a list.
+:::
+::: {.column width="45%"}
+Right column — e.g. a figure or a `` ```{r} `` cell.
+:::
+::::
+````
+
+`width` accepts any Typst length/ratio (`"55%"`, `"0.6fr"`, `"4cm"`); a column
+with no width gets an equal `1fr` share. Tune the inter-column gap with
+`column-gutter:` in the front matter (default `1.2em`). Works in every template,
+not just slides.
+
 ---
 
 ## Research poster
