@@ -9,6 +9,7 @@ contributes:
         - typst-template.typ
         - typst-show.typ
       filters:
+        - columns.lua
         - instructor.lua
       format-resources:
         - _brand.typ
