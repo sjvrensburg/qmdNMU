@@ -86,6 +86,8 @@ section header with a matching illustration. Keys: `Module-Info`,
 `slide-date`, `aspect` (`"16:9"` | `"4:3"`), `cover-image` (optional),
 `brand-font`.
 Headings drive slides: `#` = section-divider slide, `##` = content slide.
+Levels are pinned to literal Markdown depth (no auto-promotion), so this holds
+even in a deck that never uses `#` at all.
 **Lecturer/student toggle:** wrap lecturer-only material (answers, proofs, live
 code) in `::: {.instructor}` … `:::`. Hidden by default (student-safe); reveal
 in a branded box with `audience: lecturer` (front matter or `-M audience:lecturer`).
@@ -93,6 +95,10 @@ Works in every template. Give each render a distinct `-o` name.
 **Columns:** `:::: {.columns}` with `::: {.column width="55%"}` children render
 side-by-side (mapped to a Typst `#grid`); Markdown, math and code cells inside
 still work. `width` is any Typst ratio/length; gap via `column-gutter:`.
+**Beat slides:** `::: {.beat image="images/x.png"}` … `:::` renders a full-bleed
+TED-style statement — no margins/header/footer, navy text panel + full-bleed
+image, no heading needed. Optional `side` (`"left"`|`"right"`, default `"left"`)
+and `image-width` (Typst ratio, default `57%`).
 
 ### Poster (`poster: true`)
 `title`, `author`, `affiliation`, `poster-cols` (default 2), `footer-url`

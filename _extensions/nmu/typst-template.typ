@@ -357,10 +357,46 @@
 }
 
 // ===========================================================================
+// Beat slide: full-bleed statement panel + image panel (TED-style narrative
+// beat). No margins, header or footer — a deliberate break from the normal
+// content-slide chrome, for a single punchy claim next to a full-bleed image.
+//
+// Use via the `.beat` fenced div (rewritten to `#beat(...)` by beat.lua):
+//   ::: {.beat image="images/x.png"}
+//   Statement text.
+//   :::
+// or call `#beat(...)` directly from a `{=typst}` block.
+// ===========================================================================
+#let beat(
+  img-path,
+  body,
+  side: "left",        // which side the image sits on: "left" or "right"
+  image-width: 57%,     // image panel's share of the slide width
+  panel-fill: nmu-navy,
+  text-fill: white,
+  text-size: 30pt,
+) = {
+  let text-panel = box(width: 100%, height: 100%, fill: panel-fill, inset: 15mm)[
+    #set align(left + horizon)
+    #set text(fill: text-fill, size: text-size, weight: "bold")
+    #body
+  ]
+  let image-panel = box(width: 100%, height: 100%, clip: true, fill: nmu-grey-light)[
+    #image(img-path, width: 100%, height: 100%, fit: "cover")
+  ]
+  let cols = if side == "right" { (image-width, 100% - image-width) } else { (100% - image-width, image-width) }
+  let cells = if side == "right" { (image-panel, text-panel) } else { (text-panel, image-panel) }
+  page(margin: 0pt, footer: none, header: none, background: none)[
+    #grid(columns: cols, rows: (100%), cells.at(0), cells.at(1))
+  ]
+}
+
+// ===========================================================================
 // Slides (mirrors Faculty of Science PowerPoint deck)
 //   Title slide: navy field + white logo. Content slides: white with a green
 //   Science bar along the bottom edge and a footer (logo + "Change the World").
 //   `##` headings start new content slides; `#` headings are section dividers.
+//   `::: {.beat}` divs are full-bleed narrative beats (see `#beat` above).
 // ===========================================================================
 #let nmu-slides(
   title: none,

@@ -109,6 +109,8 @@ Mirrors the Faculty of Science PowerPoint deck. Slides are driven by headings:
 - `#` (level 1) → **section-divider** slide (navy, African pattern strip).
 - `##` (level 2) → **content** slide (navy title, green underline, footer).
 
+Heading levels are pinned to their literal Markdown depth (`shift-heading-level-by: 0`), so this still holds even if a deck never uses `#` at all — Quarto's default behaviour of auto-promoting the shallowest heading level used (e.g. turning an all-`##` deck's headings into level 1) is disabled. Don't rely on that promotion; write `#`/`##` for the slide type you actually want.
+
 | Key | Type | Description |
 |---|---|---|
 | `slides: true` | flag | Selects this template. |
@@ -177,6 +179,29 @@ Right column — e.g. a figure or a `` ```{r} `` cell.
 with no width gets an equal `1fr` share. Tune the inter-column gap with
 `column-gutter:` in the front matter (default `1.2em`). Works in every template,
 not just slides.
+
+### Narrative beat slides
+
+For a full-bleed TED-style statement — no margins, header or footer, a navy
+text panel next to a full-bleed image — use a `.beat` fenced div instead of a
+heading:
+
+````markdown
+::: {.beat image="images/statement.png"}
+Sometimes brilliant. \
+Sometimes confidently wrong.
+:::
+````
+
+| Attribute | Default | Description |
+|---|---|---|
+| `image` | *(required)* | Path to the image, relative to the `.qmd`. |
+| `side` | `"left"` | Which side the image sits on: `"left"` puts text left/image right, `"right"` flips it. |
+| `image-width` | `57%` | Image panel's share of the slide width (a Typst ratio). |
+
+The body is native Markdown (line breaks need a trailing `\`, as above). Beat
+slides don't have headings, so they never trigger the `#`/`##` divider/content
+styling — put ordinary `##` slides before or after them as needed.
 
 ---
 
