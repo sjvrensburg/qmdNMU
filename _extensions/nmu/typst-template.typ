@@ -66,6 +66,11 @@
   solutions: false,
   monochrome: false,
   brand-font: "nunito",
+  // Body text size in points. A memorandum is written on while it is marked,
+  // and 11pt leaves no room between the lines for ticks and mark tallies, so a
+  // paper and its memo often want different sizes from one source. Set from the
+  // front matter or the command line, e.g. `-M body-size:12.5`.
+  body-size: 11,
   body,
 ) = {
   let fonts = nmu-resolve-fonts(brand-font)
@@ -78,19 +83,26 @@
   set page(
     paper: "a4",
     margin: (top: 22mm, bottom: 20mm, x: 22mm),
+    // The rule and the page-number row must sit in a `stack`. As two
+    // consecutive block-level items they also picked up the document's
+    // paragraph spacing, which added ~9pt to the intended `v(2pt)` and left the
+    // page number floating well clear of its rule. `stack` is not affected by
+    // block spacing, so the 2.5pt below is the whole gap.
     footer: context {
-      line(length: 100%, stroke: 0.5pt + accent)
-      v(2pt)
       set text(size: 8.5pt, fill: soft)
-      grid(columns: (1fr, auto, 1fr),
-        align: (left + horizon, center + horizon, right + horizon),
-        if module-code != none [#module-code] else [],
-        text(fill: ink, weight: "bold")[Page #context counter(page).display() of #context counter(page).final().first()],
-        if solutions [#text(fill: accent, weight: "bold")[Memorandum]] else [],
+      stack(
+        line(length: 100%, stroke: 0.5pt + accent),
+        v(2.5pt),
+        grid(columns: (1fr, auto, 1fr),
+          align: (left + horizon, center + horizon, right + horizon),
+          if module-code != none [#module-code] else [],
+          text(fill: ink, weight: "bold")[Page #context counter(page).display() of #context counter(page).final().first()],
+          if solutions [#text(fill: accent, weight: "bold")[Memorandum]] else [],
+        ),
       )
     },
   )
-  set text(font: fonts.body, size: 11pt, fill: ink, lang: "en")
+  set text(font: fonts.body, size: body-size * 1pt, fill: ink, lang: "en")
   set par(justify: true, leading: 0.62em)
   show link: set text(fill: accent)
   nmu-solutions-state.update(solutions)
@@ -123,6 +135,11 @@
 
   // Info bar: duration / total marks / date
   block(width: 100%, inset: 9pt, radius: 3pt, fill: panel, stroke: 0.5pt + ink)[
+    // Pinned at 11pt rather than inheriting `body-size`: the bar is a label
+    // strip, not body prose, and at a large body size its three fixed columns
+    // are too narrow for their contents, wrapping a long date onto a second
+    // line. Pinning also keeps the bar the same height at every body size.
+    #set text(size: 11pt)
     #grid(columns: (1fr, 1fr, 1fr), align: (left, center, right),
       if duration != none [*Duration:* #duration] else [],
       [*Total marks:* #if total-marks != none [#total-marks] else [#nmu-total-marks()]],

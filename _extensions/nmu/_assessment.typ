@@ -17,8 +17,11 @@
 #let nmu-assess-accent() = if nmu-mono-state.get() { black } else { nmu-science }
 #let nmu-assess-ink()    = if nmu-mono-state.get() { black } else { nmu-navy }
 
+// Sized in `em` so the tag tracks the document's body size. A fixed point size
+// matched the 11pt body it was written for, but reads as a footnote beside the
+// question once `body-size` is raised.
 #let nmu-marks-tag(m) = context {
-  text(fill: nmu-assess-accent(), weight: "bold")[
+  text(fill: nmu-assess-accent(), weight: "bold", size: 1em)[
     [#m #if m == 1 [mark] else [marks]]
   ]
 }
@@ -32,7 +35,11 @@
   if marks != none { nmu-marktotal.update(n => n + marks) }
   block(above: 16pt, below: 8pt, breakable: true, width: 100%)[
     #grid(columns: (1fr, auto), align: (left + top, right + top),
-      context text(weight: "bold", fill: nmu-assess-ink(), size: 12pt)[
+      // 1.1em rather than a fixed 12pt: the constant was one point above the
+      // 11pt body it was written for, so at a larger `body-size` the heading
+      // ended up smaller than the question it introduces. At an 11pt body this
+      // resolves to 12.1pt, so existing documents are unchanged.
+      context text(weight: "bold", fill: nmu-assess-ink(), size: 1.1em)[
         Question #nmu-qcounter.display()
       ],
       if marks != none { nmu-marks-tag(marks) } else [],

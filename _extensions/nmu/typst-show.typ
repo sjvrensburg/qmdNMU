@@ -33,6 +33,9 @@ $endif$
 $if(brand-font)$
   brand-font: "$brand-font$",
 $endif$
+$if(body-size)$
+  body-size: $body-size$,
+$endif$
   body,
 )
 $elseif(lecture-notes)$
